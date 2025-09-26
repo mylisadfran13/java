@@ -25,3 +25,5 @@ public class Palindrome {
         return s.equals(reversed);
     }
 }
+
+// java Palindrome madam racecar apple kayak song noon
