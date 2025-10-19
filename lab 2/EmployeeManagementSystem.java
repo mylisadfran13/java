@@ -21,7 +21,6 @@ abstract class Employee {
     public abstract void work();
     public abstract void displayInfo();
     
-    //геттеры и сеттеры (инкапсуляция)
     public String getName() {
         return name;
     }
@@ -51,12 +50,12 @@ abstract class Employee {
     }
 }
 
+//админ
 class Administrator extends Employee {
     private String department;
     private int yearsOfExperience;
     private boolean hasManagementRights;
     
-    //конструктор по умолчанию
     public Administrator() {
         super();
     }
@@ -82,7 +81,6 @@ class Administrator extends Employee {
         System.out.println("Права управления: " + (hasManagementRights ? "Да" : "Нет"));
     }
     
-    //специфические методы для администратора
     public void manageTeam() {
         System.out.println(name + " управляет командой в отделе " + department);
     }
@@ -91,7 +89,7 @@ class Administrator extends Employee {
         System.out.println(name + " генерирует отчет по отделу " + department);
     }
     
-    //геттеры и сеттеры
+
     public String getDepartment() {
         return department;
     }
@@ -117,7 +115,7 @@ class Administrator extends Employee {
     }
 }
 
-//второй уровень наследования - Программист (наследуется от Employee)
+//прогер
 class Programmer extends Employee {
     private String programmingLanguage;
     private String project;
@@ -134,7 +132,6 @@ class Programmer extends Employee {
         this.linesOfCodeWritten = linesOfCodeWritten;
     }
     
-    //абстрактные методы
     @Override
     public void work() {
         System.out.println(name + " пишет код на " + programmingLanguage + " для проекта " + project);
@@ -157,7 +154,7 @@ class Programmer extends Employee {
         System.out.println(name + " участвует в собрании по проекту " + project);
     }
     
-    //геттеры и сеттеры
+
     public String getProgrammingLanguage() {
         return programmingLanguage;
     }
@@ -183,7 +180,7 @@ class Programmer extends Employee {
     }
 }
 
-//второй уровень наследования - Менеджер (наследуется от Employee)
+//мен
 class Manager extends Employee {
     private int teamSize;
     private String managedProject;
@@ -200,7 +197,6 @@ class Manager extends Employee {
         this.budget = budget;
     }
     
-    //реализация абстрактных методов
     @Override
     public void work() {
         System.out.println(name + " управляет командой из " + teamSize + " человек");
@@ -223,7 +219,7 @@ class Manager extends Employee {
         System.out.println(name + " распределяет ресурсы для проекта " + managedProject);
     }
     
-    //геттеры и сеттеры
+
     public int getTeamSize() {
         return teamSize;
     }
@@ -253,18 +249,18 @@ public class EmployeeManagementSystem {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("=== СИСТЕМА УПРАВЛЕНИЯ СОТРУДНИКАМИ ===\n");
+        System.out.println("управление сотрудниками\n");
  
-        System.out.println("Создание администратора:");
+        System.out.println("создание администратора:");
         Administrator admin = createAdministrator(scanner);
         
-        System.out.println("\nСоздание программиста:");
+        System.out.println("\nсоздание программиста:");
         Programmer programmer = createProgrammer(scanner);
         
-        System.out.println("\nСоздание менеджера:");
+        System.out.println("\nсоздание менеджера:");
         Manager manager = createManager(scanner);
         
-        System.out.println("\n=== ДЕМОНСТРАЦИЯ ПОЛИМОРФИЗМА ===");
+        System.out.println("\nполиморфизм");
         Employee[] employees = {admin, programmer, manager};
         
         for (Employee employee : employees) {
@@ -278,62 +274,62 @@ public class EmployeeManagementSystem {
             } else if (employee instanceof Manager) {
                 ((Manager) employee).conductMeeting();
             }
-            System.out.println("--------------------");
+            System.out.println("            ");
         }
         
         //счетчик
-        System.out.println("Всего создано сотрудников: " + Employee.getEmployeeCount());
+        System.out.println("всего создано сотрудников: " + Employee.getEmployeeCount());
         
-        System.out.println("\n=== ДЕМОНСТРАЦИЯ ГЕТТЕРОВ И СЕТТЕРОВ ===");
-        System.out.println("Имя программиста: " + programmer.getName());
+        System.out.println("\nгеттеры и сеттеры");
+        System.out.println("имя программиста: " + programmer.getName());
         programmer.setSalary(programmer.getSalary() + 1000);
-        System.out.println("Новая зарплата программиста: $" + programmer.getSalary());
+        System.out.println("новая зарплата программиста: рублей" + programmer.getSalary());
         
         scanner.close();
     }
     
     public static Administrator createAdministrator(Scanner scanner) {
-        System.out.print("Введите имя администратора: ");
+        System.out.print("введите имя администратора: ");
         String name = scanner.nextLine();
         
-        System.out.print("Введите ID: ");
+        System.out.print("введите ID: ");
         int id = scanner.nextInt();
         
-        System.out.print("Введите зарплату: ");
+        System.out.print("введите зарплату: ");
         double salary = scanner.nextDouble();
         scanner.nextLine(); //очистка буфера
         
-        System.out.print("Введите отдел: ");
+        System.out.print("введите отдел: ");
         String department = scanner.nextLine();
         
-        System.out.print("Введите опыт работы (лет): ");
+        System.out.print("введите опыт работы (лет): ");
         int experience = scanner.nextInt();
         
-        System.out.print("Имеет права управления (true/false): ");
+        System.out.print("ммеет права управления (true/false): ");
         boolean hasRights = scanner.nextBoolean();
-        scanner.nextLine(); //очистка буфера
+        scanner.nextLine();
         
         return new Administrator(name, id, salary, department, experience, hasRights);
     }
     
     public static Programmer createProgrammer(Scanner scanner) {
-        System.out.print("Введите имя программиста: ");
+        System.out.print("введите имя программиста: ");
         String name = scanner.nextLine();
         
         System.out.print("Введите ID: ");
         int id = scanner.nextInt();
         
-        System.out.print("Введите зарплату: ");
+        System.out.print("введите зарплату: ");
         double salary = scanner.nextDouble();
         scanner.nextLine(); 
         
-        System.out.print("Введите язык программирования: ");
+        System.out.print("введите язык программирования: ");
         String language = scanner.nextLine();
         
-        System.out.print("Введите проект: ");
+        System.out.print("введите проект: ");
         String project = scanner.nextLine();
         
-        System.out.print("Введите количество написанных строк кода: ");
+        System.out.print("введите количество написанных строк кода: ");
         int lines = scanner.nextInt();
         scanner.nextLine(); 
         
@@ -341,23 +337,23 @@ public class EmployeeManagementSystem {
     }
     
     public static Manager createManager(Scanner scanner) {
-        System.out.print("Введите имя менеджера: ");
+        System.out.print("введите имя менеджера: ");
         String name = scanner.nextLine();
         
-        System.out.print("Введите ID: ");
+        System.out.print("введите ID: ");
         int id = scanner.nextInt();
         
-        System.out.print("Введите зарплату: ");
+        System.out.print("введите зарплату: ");
         double salary = scanner.nextDouble();
         
-        System.out.print("Введите размер команды: ");
+        System.out.print("введите размер команды: ");
         int teamSize = scanner.nextInt();
         scanner.nextLine();
         
-        System.out.print("Введите управляемый проект: ");
+        System.out.print("введите управляемый проект: ");
         String project = scanner.nextLine();
         
-        System.out.print("Введите бюджет: ");
+        System.out.print("введите бюджет: ");
         double budget = scanner.nextDouble();
         scanner.nextLine(); 
         
