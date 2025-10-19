@@ -140,41 +140,4 @@ public class HashTable<K, V> {
             }
         }
     }
-
-    public class Main {
-    public static void main(String[] args) {
-        // Тестируем нашу хэш-таблицу
-        HashTable<String, Integer> table = new HashTable<>();
-        
-        System.out.println("=== Тестирование HashTable ===");
-        
-        // Добавляем элементы
-        table.put("apple", 10);
-        table.put("banana", 20);
-        table.put("orange", 30);
-        
-        System.out.println("Размер таблицы: " + table.size());
-        System.out.println("Пустая ли таблица: " + table.isEmpty());
-        
-        // Получаем элементы
-        System.out.println("apple = " + table.get("apple"));
-        System.out.println("banana = " + table.get("banana"));
-        
-        // Проверяем наличие ключей
-        System.out.println("Есть ли 'orange': " + table.containsKey("orange"));
-        System.out.println("Есть ли 'grape': " + table.containsKey("grape"));
-        
-        // Обновляем значение
-        table.put("apple", 15);
-        System.out.println("apple после обновления = " + table.get("apple"));
-        
-        // Удаляем элемент
-        Integer removed = table.remove("banana");
-        System.out.println("Удален banana = " + removed);
-        System.out.println("Размер после удаления: " + table.size());
-        
-        // Выводим всю таблицу
-        table.printTable();
-    }
-}
 }
