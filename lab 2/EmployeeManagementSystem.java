@@ -260,7 +260,7 @@ public class EmployeeManagementSystem {
         System.out.println("\nсоздание менеджера:");
         Manager manager = createManager(scanner);
         
-        System.out.println("\nполиморфизм");
+
         Employee[] employees = {admin, programmer, manager};
         
         for (Employee employee : employees) {
@@ -277,7 +277,7 @@ public class EmployeeManagementSystem {
             System.out.println("            ");
         }
         
-        //счетчик
+
         System.out.println("всего создано сотрудников: " + Employee.getEmployeeCount());
         
         System.out.println("\nгеттеры и сеттеры");

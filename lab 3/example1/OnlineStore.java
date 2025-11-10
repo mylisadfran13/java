@@ -11,7 +11,6 @@ class Product {
     
     public String getName() { return name; }
     public double getPrice() { return price; }
-    
     public void setName(String name) { this.name = name; }
     public void setPrice(double price) { this.price = price; }
     
@@ -44,7 +43,6 @@ class Order {
     public void setProducts(List<Product> products) { this.products = products; }
     public void setStatus(String status) { this.status = status; }
     
-
     public double getTotalPrice() {
         return products.stream().mapToDouble(Product::getPrice).sum();
     }
@@ -79,11 +77,11 @@ class OrderHashTable {
     private int hash(String orderNumber) {
         return Math.abs(orderNumber.hashCode()) % table.length;
     }
-
+    
     @SuppressWarnings("unchecked")
     private void resize() {
         LinkedList<Order>[] oldTable = table;
-        table = new LinkedList[table.length * 2];
+        table = new LinkedList[oldTable.length * 2];
         
         for (int i = 0; i < table.length; i++) {
             table[i] = new LinkedList<>();
@@ -93,22 +91,21 @@ class OrderHashTable {
 
         for (LinkedList<Order> bucket : oldTable) {
             for (Order order : bucket) {
-                insert(order);
+                insert(order.getOrderNumber(), order);
             }
         }
     }
     
-    public void insert(Order order) {
+    public void insert(String orderNumber, Order order) {
         if ((double) size / table.length > LOAD_FACTOR) {
             resize();
         }
         
-        int index = hash(order.getOrderNumber());
+        int index = hash(orderNumber);
         LinkedList<Order> bucket = table[index];
         
-        //проверка
         for (Order existingOrder : bucket) {
-            if (existingOrder.getOrderNumber().equals(order.getOrderNumber())) {
+            if (existingOrder.getOrderNumber().equals(orderNumber)) {
                 existingOrder.setOrderDate(order.getOrderDate());
                 existingOrder.setProducts(order.getProducts());
                 existingOrder.setStatus(order.getStatus());
@@ -130,7 +127,7 @@ class OrderHashTable {
             }
         }
         
-        return null; 
+        return null;
     }
     
     public boolean delete(String orderNumber) {
@@ -147,9 +144,9 @@ class OrderHashTable {
             }
         }
         
-        return false; 
+        return false;
     }
-
+    
     public boolean updateStatus(String orderNumber, String newStatus) {
         Order order = search(orderNumber);
         if (order != null) {
@@ -167,35 +164,41 @@ class OrderHashTable {
         return size == 0;
     }
     
-
     public void displayAllOrders() {
-        System.out.println("все заказы в системе:");
-        for (LinkedList<Order> bucket : table) {
-            for (Order order : bucket) {
-                System.out.println(order);
-                System.out.println("     ");
+        System.out.println("все заказы");
+        for (int i = 0; i < table.length; i++) {
+            LinkedList<Order> bucket = table[i];
+            if (!bucket.isEmpty()) {
+                System.out.println("ящик " + i + ":");
+                for (Order order : bucket) {
+                    System.out.println("  " + order);
+                    System.out.println("конец");
+                }
             }
         }
+        System.out.println("всего заказов: " + size);
     }
 }
+
 
 public class OnlineStore {
     public static void main(String[] args) {
         OrderHashTable orderTable = new OrderHashTable();
-
+        
         List<Product> products1 = Arrays.asList(
             new Product("ноут", 50000),
-            new Product("мышка", 1500)
+            new Product("мышь", 1500)
         );
         
         List<Product> products2 = Arrays.asList(
-            new Product("телеф", 30000),
-            new Product("чехол", 1000)
+            new Product("тел", 30000),
+            new Product("чехол", 800),
+            new Product("наушники", 2500)
         );
         
         List<Product> products3 = Arrays.asList(
-            new Product("наушники", 5000),
-            new Product("планшет", 25000)
+            new Product("зарядка", 500),
+            new Product("салфетка", 50)
         );
         
 
@@ -204,46 +207,41 @@ public class OnlineStore {
         Order order3 = new Order("ORD003", new Date(), products3, "выполнен");
         
 
-        orderTable.insert(order1);
-        orderTable.insert(order2);
-        orderTable.insert(order3);
+        System.out.println("добавить заказы");
+        orderTable.insert("ORD001", order1);
+        orderTable.insert("ORD002", order2);
+        orderTable.insert("ORD003", order3);
         
-        System.out.println("добавлено заказов: " + orderTable.size());
-
-        System.out.println("\nпоиск заказа ORD002:");
+        orderTable.displayAllOrders();
+        
+        System.out.println("\nнайти заказ");
         Order foundOrder = orderTable.search("ORD002");
         if (foundOrder != null) {
-            System.out.println(foundOrder);
+            System.out.println("найден заказ: " + foundOrder);
         } else {
-            System.out.println("заказ не найден");
+            System.out.println("заказ не найден :(");
         }
         
-        System.out.println("\nизменение статуса заказа ORD001 на 'доставлен':");
-        if (orderTable.updateStatus("ORD001", "доставлен")) {
-            System.out.println("Статус успешно изменен");
-            System.out.println(orderTable.search("ORD001"));
-        } else {
-            System.out.println("заказ не найден");
-        }
 
-        System.out.println("\nудаление заказа ORD003:");
-        if (orderTable.delete("ORD003")) {
-            System.out.println("заказ успешно удален");
-        } else {
-            System.out.println("заказ не найден");
+        System.out.println("\nпоменять статус");
+        boolean updated = orderTable.updateStatus("ORD001", "доставляется");
+        if (updated) {
+            System.out.println("сатус заказа ORD001 успешно изменен");
+            System.out.println("обновленный заказ: " + orderTable.search("ORD001"));
         }
         
-        System.out.println("\nосталось заказов: " + orderTable.size());
-        
-        System.out.println("\nпоиск удаленного заказа ORD003:");
-        Order deletedOrder = orderTable.search("ORD003");
-        if (deletedOrder != null) {
-            System.out.println(deletedOrder);
-        } else {
-            System.out.println("заказ не найден");
+        System.out.println("\nудалить");
+        boolean deleted = orderTable.delete("ORD003");
+        if (deleted) {
+            System.out.println("заказ ORD003 успешно удален");
         }
-
-        System.out.println("\n" + "=".repeat(50));
+        
         orderTable.displayAllOrders();
+        
+        System.out.println("\nнайти то, что уже удалили (проверка)");
+        Order deletedOrder = orderTable.search("ORD003");
+        if (deletedOrder == null) {
+            System.out.println("заказ ORD003 не найден (удален)");
+        }
     }
 }
