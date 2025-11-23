@@ -19,6 +19,6 @@ public class Main {
         System.out.println("удаленное значение: " + removed); 
         System.out.println("размер после удаления: " + hashTable.size());
         
-        System.out.println("Значение для 'виноградик': " + hashTable.get("виноградик")); 
+        System.out.println("значение для 'виноградик': " + hashTable.get("виноградик")); 
     }
 }

@@ -139,11 +139,11 @@ class Programmer extends Employee {
     
     @Override
     public void displayInfo() {
-        System.out.println("Программист: " + name + " (ID: " + id + ")");
-        System.out.println("Язык программирования: " + programmingLanguage);
-        System.out.println("Проект: " + project);
-        System.out.println("Написано строк кода: " + linesOfCodeWritten);
-        System.out.println("Зарплата: рублей" + salary);
+        System.out.println("программист: " + name + " (ID: " + id + ")");
+        System.out.println("язык программирования: " + programmingLanguage);
+        System.out.println("проект: " + project);
+        System.out.println("написано строк кода: " + linesOfCodeWritten);
+        System.out.println("зарплата: рублей" + salary);
     }
 
     public void debugCode() {
@@ -247,6 +247,7 @@ class Manager extends Employee {
 
 public class EmployeeManagementSystem {
     public static void main(String[] args) {
+        
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("управление сотрудниками\n");
