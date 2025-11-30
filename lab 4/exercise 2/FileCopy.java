@@ -33,8 +33,9 @@ public class FileCopy {
         } finally {
             try {
                 if (inputStream != null) {
-                    inputStream.close();
-                    System.out.println("исходный файл закрыт");
+                    throw new IOException("ошибка диска при закрытии файла");
+                    //inputStream.close();
+                    //System.out.println("исходный файл закрыт");
                 }
             } catch (IOException e) {
                 System.out.println("ошибка при закрытии исходного файла: " + e.getMessage());

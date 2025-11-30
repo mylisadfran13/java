@@ -1,0 +1,13 @@
+The project, officially designated "Chronos-7," was the culmination of 23 years of research and an investment of over $4.5 billion. Its logbooks were filled with complex equations, stability thresholds, and energy requirements calculated down to the last joule. Dr. Elara Aris, the lead physicist, had personally overseen 1,528 separate integrity tests. The theoretical margin of error was a comforting 0.00015%.
+
+The activation sequence began at 14:00:00 Universal Time. The hum of the reactor was a steady 75 decibels, a sound she had grown accustomed to. The target date was set for a mere 72 hours into the future: October 26, 2023. A simple test—send a data probe containing a single, prime number "7" and retrieve it.
+
+At T-plus 4.5 seconds, the main console flashed a warning she had never seen before. Error Code #8192. The temporal field wasn't stabilizing; it was fluctuating wildly. The energy readings spiked to 147% of the maximum safe limit. Alarms blared, and the 15 members of her team scrambled to initiate the emergency shutdown, Protocol Epsilon-9.
+
+It was too late.
+
+A deafening silence fell as the machinery powered down. The air smelled of ozone and burnt wiring. On the central monitor, where the confirmation signal from the future should have been, was a single, looping video file. It showed a cityscape she recognized as New York, but the skies were filled with unfamiliar, silent aircraft, and the digital clocks on buildings were all frozen on the same date: April 17, 2187.
+
+There was no data probe. No prime number. Instead, in the physical retrieval chamber lay a single, perfectly preserved object: a child's teddy bear, wearing a small, tarnished medal. Engraved on the medal were the coordinates 40.7128° N, 74.0060° W—the location of New York City—and a serial number: K-29.
+
+Dr. Aris picked up the bear, her hands trembling. The 0.00015% had happened. They hadn't sent something forward; they had pulled something back. The calculations weren't wrong; they were incomplete. The project was meant to be a leap into the future, but the first and only artifact of Chronos-7 was a relic from a time 164 years ahead of their own. The question now wasn't what they had achieved, but what, or who, had answered.

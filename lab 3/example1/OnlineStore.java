@@ -78,44 +78,44 @@ class OrderHashTable {
         return Math.abs(orderNumber.hashCode()) % table.length;
     }
     
-    // @SuppressWarnings("unchecked")
-    // private void resize() {
-    //     LinkedList<Order>[] oldTable = table;
-    //     table = new LinkedList[oldTable.length * 2];
+    @SuppressWarnings("unchecked")
+    private void resize() {
+         LinkedList<Order>[] oldTable = table;
+         table = new LinkedList[oldTable.length * 2];
         
-    //     for (int i = 0; i < table.length; i++) {
-    //         table[i] = new LinkedList<>();
-    //     }
+         for (int i = 0; i < table.length; i++) {
+             table[i] = new LinkedList<>();
+         }
         
-    //     size = 0;
+         size = 0;
 
-    //     for (LinkedList<Order> bucket : oldTable) {
-    //         for (Order order : bucket) {
-    //             insert(order.getOrderNumber(), order);
-    //         }
-    //     }
-    // }
+         for (LinkedList<Order> bucket : oldTable) {
+             for (Order order : bucket) {
+                 insert(order.getOrderNumber(), order);
+             }
+         }
+     }
     
-    // public void insert(String orderNumber, Order order) {
-    //     if ((double) size / table.length > LOAD_FACTOR) {
-    //         resize();
-    //     }
+     public void insert(String orderNumber, Order order) {
+         if ((double) size / table.length > LOAD_FACTOR) {
+             resize();
+         }
         
-    //     int index = hash(orderNumber);
-    //     LinkedList<Order> bucket = table[index];
+         int index = hash(orderNumber);
+         LinkedList<Order> bucket = table[index];
         
-    //     for (Order existingOrder : bucket) {
-    //         if (existingOrder.getOrderNumber().equals(orderNumber)) {
-    //             existingOrder.setOrderDate(order.getOrderDate());
-    //             existingOrder.setProducts(order.getProducts());
-    //             existingOrder.setStatus(order.getStatus());
-    //             return;
-    //         }
-    //     }
+         for (Order existingOrder : bucket) {
+             if (existingOrder.getOrderNumber().equals(orderNumber)) {
+                 existingOrder.setOrderDate(order.getOrderDate());
+                 existingOrder.setProducts(order.getProducts());
+                 existingOrder.setStatus(order.getStatus());
+                 return;
+             }
+         }
         
-    //     bucket.add(order);
-    //     size++;
-    // }
+         bucket.add(order);
+         size++;
+     }
     
     public Order search(String orderNumber) {
         int index = hash(orderNumber);
@@ -207,10 +207,10 @@ public class OnlineStore {
         Order order3 = new Order("order3", new Date(), products3, "выполнен");
         
 
-        // System.out.println("добавить заказы");
-        // orderTable.insert("order1", order1);
-        // orderTable.insert("order2", order2);
-        // orderTable.insert("order3", order3);
+         System.out.println("добавить заказы");
+         orderTable.insert("order1", order1);
+         orderTable.insert("order2", order2);
+         orderTable.insert("order3", order3);
         
         orderTable.displayAllOrders();
         
