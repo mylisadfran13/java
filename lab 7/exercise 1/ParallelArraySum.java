@@ -53,7 +53,6 @@ public class ParallelArraySum {
         System.out.println("время: " + (endTime - startTime) + " мс\n");
         
         startTime = System.currentTimeMillis();
-        
         int mid = arraySize / 2;
         
         SumCalculator calculator1 = new SumCalculator(array, 0, mid, "поток 1");

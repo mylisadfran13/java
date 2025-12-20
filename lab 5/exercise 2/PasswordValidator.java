@@ -47,7 +47,7 @@ public class PasswordValidator {
             return false;
         }
 
-        String regex = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,16}$";
+        String regex = "^(?=.*[A-Z])(?=.*\\d).{8,16}$";
         
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);

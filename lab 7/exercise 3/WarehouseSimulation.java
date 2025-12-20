@@ -29,7 +29,7 @@ class Warehouse {
     public Integer takeGood(int loaderId) throws InterruptedException {
         lock.lock();
         try {
-            while (isDelivering) {
+            while (isDelivering) {  
                 System.out.printf("[грузчик %d] ждет окончания доставки...%n", loaderId);
                 deliveryInProgress.await();
             }
@@ -66,11 +66,14 @@ class Warehouse {
         isDelivering = true;
         
 
-        new Thread(() -> {
-            try {
-                deliverBatch(iterationCount, currentWeight);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {  
+                try {
+                    deliverBatch(iterationCount, currentWeight);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }).start();
     }
@@ -79,10 +82,10 @@ class Warehouse {
         System.out.printf("[доставка #%d] началась погрузка...%n", batchNumber);
         Thread.sleep(1000); 
         
-        System.out.printf("[доставка #%d] В пути...%n", batchNumber);
+        System.out.printf("[доставка #%d] в пути...%n", batchNumber);
         Thread.sleep(1500); 
         
-        System.out.printf("[доставка #%d] Разгрузка на другом складе...%n", batchNumber);
+        System.out.printf("[доставка #%d] разгрузка на другом складе...%n", batchNumber);
         Thread.sleep(1000);
         
         System.out.printf("[доставка #%d] партия %d кг доставлена наконец-то%n\n", batchNumber, weight);
@@ -120,7 +123,7 @@ class Loader implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.printf("[грузчик %d] Начал работу%n", id);
+            System.out.printf("[грузчик %d] начал работу%n", id);
             
             while (warehouse.hasGoods()) {
                 Integer weight = warehouse.takeGood(id);
@@ -150,7 +153,7 @@ public class WarehouseSimulation {
         System.out.println("товары: " + goods);
         System.out.println("всего вес: " + goods.stream().mapToInt(Integer::intValue).sum() + " кг");
         System.out.println("количество грузчиков: 3");
-        System.out.println("лимит за итерацию: 150 кг");
+        System.out.println("лимит за погрузку: 150 кг");
         
         Warehouse warehouse = new Warehouse(goods);
         
